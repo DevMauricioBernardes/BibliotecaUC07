@@ -47,6 +47,7 @@ namespace Biblioteca.Controllers
 
         public IActionResult Privacy()
         {
+            Autenticacao.CheckLogin(this);
             return View();
         }
     }
