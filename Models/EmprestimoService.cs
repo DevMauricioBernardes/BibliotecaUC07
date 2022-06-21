@@ -29,13 +29,13 @@ namespace Biblioteca.Models
             }
         }
 
-        public ICollection<Emprestimo> ListarTodos(FiltrosEmprestimos filtro = null)
+        public ICollection<Emprestimo> ListarTodos(FiltrosEmprestimos filtro)
         {
             using(BibliotecaContext bc = new BibliotecaContext())
             {
                 IQueryable<Emprestimo> query;
                 
-                if(filtro != null)
+                if(filtro!=null)
                 {
                     //definindo dinamicamente a filtragem
                     switch(filtro.TipoFiltro)
@@ -60,17 +60,16 @@ namespace Biblioteca.Models
                             query = bc.Emprestimos;
                         break;
                     }
+
                 }
                 else
                 {
-                    // caso filtro não tenha sido informado
                     query = bc.Emprestimos;
                 }
                 
                 List<Emprestimo>ListaConsulta = query.OrderByDescending(e => e.DataDevolucao).ToList();
 
-                for (int i = 0; i < ListaConsulta.Count; i++)
-                
+                for (int i = 0; i < ListaConsulta.Count; i++)                
                 {
                     ListaConsulta[i].Livro = bc.Livros.Find(ListaConsulta[i].LivroId);
                 }

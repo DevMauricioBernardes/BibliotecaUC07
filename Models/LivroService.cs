@@ -71,7 +71,7 @@ namespace Biblioteca.Models
                 // utiliza uma subconsulta
                 return
                     bc.Livros
-                    .Where(l =>  !(bc.Emprestimos.Where(e => e.Devolvido == false).Select(e => e.LivroId).Contains(l.Id)) )
+                    .Where(l =>  !(bc.Emprestimos.Where(e => e.Devolvido == false).Select(e => e.LivroId).Contains(l.Id)))
                     .ToList();
             }
         }
